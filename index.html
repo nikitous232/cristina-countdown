@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cuenta regresiva - Cristina</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #111;
+      color: #fff;
+      text-align: center;
+      padding-top: 100px;
+    }
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+    #countdown {
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      font-weight: bold;
+    }
+    .whatsapp {
+      margin-top: 40px;
+      display: inline-block;
+      padding: 12px 20px;
+      background-color: #25D366;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Faltan para que Cristina quede libre:</h1>
+  <div id="countdown">Cargando...</div>
+
+  <a class="whatsapp" href="#" id="whatsapp-share" target="_blank">Compartir por WhatsApp</a>
+
+  <script>
+    const targetDate = new Date("2026-12-31T00:00:00");
+
+    function updateCountdown() {
+      const now = new Date();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").textContent = "¡Ya está libre!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById("countdown").textContent =
+        `${days} días ${hours}h ${minutes}m ${seconds}s`;
+    }
+
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    const currentUrl = window.location.href;
+    const whatsappBtn = document.getElementById("whatsapp-share");
+    whatsappBtn.href = `https://wa.me/?text=Mirá esta cuenta regresiva: ${encodeURIComponent(currentUrl)}`;
+  </script>
+</body>
+</html>
